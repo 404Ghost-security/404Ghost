@@ -1,14 +1,20 @@
+
+
+
+
+
+
 # 404Ghost 👻
 
 Ever wonder how phishing attacks actually work under the hood?
 
-I built 404Ghost to find out. Instead of downloading a ready-made tool like Evilginx, I built everything from scratch — reverse proxy, fake login pages, credential capture, session hijacking — all of it. One command and the whole lab is running.
+I built 404Ghost to find out. Built everything from scratch  fake login pages, credential capture, MFA bypass, traffic interception all of it. One command and the whole lab is running.
 
 ---
 
 ## What 404Ghost Does
 
-404Ghost is a phishing simulation lab. You spin it up, send someone a link, they land on a fake login page, enter their credentials and you get an instant Telegram notification on your phone. Meanwhile mitmproxy is sitting in the middle stealing session cookies — which means even if they have MFA enabled, you still get in.
+404Ghost is a phishing simulation lab. You spin it up, send someone a link, they land on a fake login page, enter their credentials and you get an instant Telegram notification on your phone. Meanwhile mitmproxy is sitting in the middle stealing session cookies  which means even if they have MFA enabled, you still get in.
 
 This is exactly how real attackers operate. 404Ghost lets you study and simulate that in a safe controlled environment.
 
@@ -33,8 +39,6 @@ Before you start make sure you have the following installed:
 ```
 curl -fsSL https://get.docker.com | sudo sh
 ```
-docker --version
-docker compose version
 ```
 
 ---
@@ -68,7 +72,7 @@ Then open your browser:
 | Traefik dashboard | http://YOUR_IP:8080 |
 | mitmproxy UI | http://YOUR_IP:8081 |
 
----
+
 
 ## Setting Up Telegram Notifications
 
@@ -109,6 +113,7 @@ Then open your browser:
 Open your `.env` file and fill in:
 
 TELEGRAM_BOT_TOKEN=YOUR_TOKEN_HERE
+
 TELEGRAM_CHAT_ID=YOUR_CHAT_ID_HERE
 
 
@@ -138,8 +143,6 @@ cat ~/404Ghost/flask/logs/credentials.log
 
 > **Note:** Running locally the Google SSO button will show an unavailability message. For full Google OAuth capture and a real SSL padlock deploy on a VPS with a domain from [FreeDNS](https://freedns.afraid.org) and Traefik will handle the SSL certificate automatically.
 
----
-
 ## mitmproxy Setup
 
 To capture session cookies and traffic with mitmproxy:
@@ -159,29 +162,34 @@ To capture session cookies and traffic with mitmproxy:
 4. Visit the target site — all traffic will now be captured
 5. View captures at `http://YOUR_IP:8081` with password `admin123`
 
----
 
 ## What This Is Good For
 
 - Security awareness training
 - Teaching employees to spot phishing
 - Red team practice in authorized environments
----
 
-## Important
+----------------------------------------------------------------------------------------------------------------------------------------
 
-Only use this on systems you own or have written permission to test. Unauthorized use is illegal. This project exists for education and authorized testing only.
 
----
 
-## Demo
 
-🎥 [Watch the full demo on YouTube](#) — add your link here after uploading
+<strong> Only use this on systems you own or have written permission to test. Unauthorized use is illegal. This project exists for education and authorized testing only.</strong>     
 
----
+<img width="180" height="180" alt="JoeBidenReactionGIFbyTheDemocrats" src="https://github.com/user-attachments/assets/b464b7cd-b784-4e6b-b6c4-eac0a5f79813" />
+
 
 ## About
 
 I also wrote **Yon Sèl Klik** — a digital security guide written in Haitian Creole for people who want to protect themselves online.
 
 🌐 [yonselklik.com](https://yonselklik.com)
+
+## Demo — Real World Attack Chain
+
+> Recorded on a live VPS with SSL certificate, real Google OAuth, 
+> MFA bypass and Telegram notifications firing in real time.
+
+https://github.com/user-attachments/assets/17573973-dc65-44f8-8871-3d1a494b0afd
+
+
