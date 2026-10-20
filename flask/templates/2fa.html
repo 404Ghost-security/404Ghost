@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404Corp — Verification Required</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Segoe UI", system-ui, Arial, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: #c0392b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 10px;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+        }
+        .logo-text span { color: #c0392b; }
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 420px;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+        .card-header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .shield-icon {
+            width: 60px;
+            height: 60px;
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0 auto 16px;
+        }
+        .card-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+        .card-header p {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .user-email {
+            font-size: 14px;
+            color: #c0392b;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .code-display {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .code-display p {
+            font-size: 13px;
+            color: #166534;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .code-number {
+            font-size: 40px;
+            font-weight: 900;
+            color: #15803d;
+            letter-spacing: 10px;
+            font-family: monospace;
+            margin-bottom: 10px;
+        }
+        .code-timer {
+            font-size: 12px;
+            color: #16a34a;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #dcfce7;
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #16a34a;
+            border-radius: 2px;
+            animation: countdown 30s linear forwards;
+        }
+        @keyframes countdown {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .code-input {
+            width: 100%;
+            padding: 14px;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            outline: none;
+            text-align: center;
+            letter-spacing: 8px;
+            font-family: monospace;
+            transition: all 0.15s;
+        }
+        .code-input:focus {
+            border-color: #c0392b;
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+        }
+        .code-input::placeholder {
+            color: #d1d5db;
+            letter-spacing: 4px;
+            font-size: 20px;
+        }
+        .hint {
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .submit-btn:hover { background: #a93226; }
+        .resend {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .resend a {
+            color: #c0392b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer {
+            padding: 24px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .footer a {
+            color: #6b7280;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .header { padding: 14px 20px; }
+            .card { padding: 28px 24px; }
+            .code-number { font-size: 32px; letter-spacing: 6px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">404</div>
+            <div class="logo-text">404<span>Corp</span></div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="wrapper">
+            <div class="card">
+                <div class="card-header">
+                    <div class="shield-icon">🔐</div>
+                    <h1>Two-Factor Authentication</h1>
+                    <p>Verification required for</p>
+                    <p class="user-email">{{ username }}</p>
+                </div>
+
+                <div class="code-display">
+                    <p>📱 Your verification code is:</p>
+                    <div class="code-number" id="codeDisplay">{{ code }}</div>
+                    <div class="code-timer">
+                        Expires in <span id="timer">30</span> seconds
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress"></div>
+                    </div>
+                </div>
+
+                <form method="POST" action="/2fa">
+                    <div class="form-group">
+                        <label>Enter Verification Code</label>
+                        <input type="text" name="code"
+                               class="code-input"
+                               placeholder="000000"
+                               maxlength="6"
+                               pattern="[0-9]{6}"
+                               required autofocus>
+                        <p class="hint">Enter the 6-digit code shown above</p>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Verify & Continue →
+                    </button>
+                </form>
+
+                <div class="resend">
+                    Didn't get a code? <a href="/2fa">Generate new code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">IT Support</a>
+        <br><br>
+        © 2025 404Corp Inc. All rights reserved.
+    </div>
+
+    <script>
+        // Countdown timer
+        let seconds = 30;
+        const timer = document.getElementById("timer");
+        const countdown = setInterval(() => {
+            seconds--;
+            timer.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                timer.textContent = "0";
+                document.getElementById("codeDisplay").textContent = "------";
+            }
+        }, 1000);
+
+        // Auto format code input numbers only
+        document.querySelector(".code-input").addEventListener("input", function() {
+            this.value = this.value.replace(/[^0-9]/g, "");
+        });
+    </script>
+</body>
+</html>

